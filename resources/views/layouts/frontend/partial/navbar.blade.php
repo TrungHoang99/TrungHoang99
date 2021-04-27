@@ -93,7 +93,7 @@
               <div class="ripple-container"></div>
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="multiDropdownMenu">
-                <a class="dropdown-item" href="{{ route('login') }}" target="_blank">
+                <a class="dropdown-item" href="{{ route('login') }}">
                   Sign in  <span class="text-primary"><i class="fas fa-sign-in-alt"></i></span>
                 </a>
                 <div class="dropdown-divider"></div>
