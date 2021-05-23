@@ -20,7 +20,9 @@ class PersonalController extends Controller
      */
     public function index()
     {
-        
+        $posts = Auth::user()->posts()->approved()->latest()->get();
+        $comments = Auth::user()->comments;
+        return view('user.setting.index',compact('posts', 'comments'));
     }
 
     /**
@@ -117,6 +119,10 @@ class PersonalController extends Controller
         $user->image = $image;
 
         $user->about = $request->about;
+
+        $user->social_network = $request->social_network;
+        $user->social_network_link = $request->social_network_link;
+
         $user->save();
 
         return back()->with('success', 'Update profile completed ^^');

@@ -30,7 +30,7 @@ class PostController extends Controller
     {
         $category = Category::where('title',$title)->first();
         $posts = $category->posts()->approved()->paginate(10);
-        $lastedposts = $category->posts()->latest()->take(3)->get();
+        $lastedposts = $category->posts()->approved()->latest()->take(3)->get();
         $categories = Category::all();
         return view('pages.category',compact('categories', 'category', 'lastedposts', 'posts'));
     }

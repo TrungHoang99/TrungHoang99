@@ -122,12 +122,13 @@
             <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
               <div class="dropdown-header py-1">
                 <h6 class="text-muted m-0 mr-1">Welcome</h6>
-                <span class="text-center h6 text-primary">{{ Auth::user()->name }} </span>
+                <small class="h6 text-primary">{{ Auth::user()->name }} </small>
               </div>
               <a href="{{ route('user.personal.profile') }}" class="dropdown-item"><i class="ni ni-single-02 text-primary"></i><span>My profile</span></a>
-              <a href="#" class="dropdown-item"><i class="ni ni-settings text-primary"></i><span>Settings</span></a>
-              <a href="#" class="dropdown-item"><i class="ni ni-calendar-grid-58 text-primary"></i><span>Activity</span></a>
-              <a href="#" class="dropdown-item"><i class="ni ni-support-16 text-primary"></i><span>Support</span></a>
+              <!-- <a href="#" class="dropdown-item"><i class="ni ni-settings text-primary"></i><span>Settings</span></a> -->
+              <a href="{{ route('user.personal.timeline') }}" class="dropdown-item"><i class="ni ni-calendar-grid-58 text-primary"></i><span>My activity</span></a>
+              <a href="{{ route('user.post.index') }}" class="dropdown-item"><i class="ni ni-folder-17 text-primary"></i><span>My post</span></a>
+              <a href="{{ route('user.comment.index') }}" class="dropdown-item"><i class="ni ni-chat-round text-primary"></i><span>My comment</span></a>
               <div class="dropdown-divider"></div>
               <a href="{{ route('logout') }}" class="dropdown-item" 
               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

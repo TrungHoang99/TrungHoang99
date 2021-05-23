@@ -8,7 +8,7 @@
     <div class="container">
       <!-- Page Heading/Breadcrumbs -->
     <h2 class="display-3 mt-4 mb-3">Blog's category
-      <small>category</small>
+      <small>{{$category->title}}</small>
     </h1>
 
     <ol class="breadcrumb">
@@ -38,8 +38,12 @@
             <a href="{{ route('post.details', $post->id) }}" class="btn btn-link">Read More &rarr;</a>
             <div class="dropdown-divider mb-2"></div>
             <div class="d-flex justify-content-between pb-0">
-              <a href="" class=""><i class="ni ni-single-02"></i>&nbsp;<span>{{ $post->user->name }}</span></a>
-              <p class="text-muted">Posted on {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}} </p>
+              <a href="{{ route('user.profile', $post->user->name) }}" class="d-flex justify-content-start my-1">
+                <img class="d-flex mr-2 rounded-circle" src="{{asset('storage/profiles/'. $post->user->image)}}" alt="{{$post->user->image}}" style="background-position: center; width: 34px; height: 34px;"/>
+                <span class="pt-1">{{$post->user->name}}</span>
+              </a>
+              <!-- <a href="" class=""><i class="ni ni-single-02"></i>&nbsp;<span>{{ $post->user->name }}</span></a> -->
+              <p class="text-muted mb-0 pt-2">Posted on {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}} </p>
             </div>
           </div>
         </div>
@@ -105,7 +109,7 @@
               <p class="description opacity-8 text-sm mb-1 lh-100"><small>Posted on {{\Carbon\Carbon::parse($lpost->created_at)->diffForHumans()}}</small></p>
             </div>
             @endif
-            <!-- @endif             -->
+            <!-- @endif -->
             @endforeach
             <!-- end-post -->
             <!-- post -->

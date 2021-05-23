@@ -38,6 +38,8 @@ Route::get('/search','SearchController@search')->name('search');
 Route::get('profile/{name}','UserController@profile')->name('user.profile');
 
 Route::group(['middleware'=>['auth']], function (){
+    Route::post('like/{post}/add','LikeController@add')->name('post.like');
+
     Route::post('comment/{post}','CommentController@store')->name('comment.add');
     Route::post('comment-reply/{comment}','CommentReplyController@store')->name('reply.add');
 
@@ -72,6 +74,7 @@ Route::group(['prefix' => 'user', 'as' => 'user.', 'namespace' => 'User', 'middl
     Route::resource('post', 'PostController');
     Route::get('post/pending', 'PostController@postPending')->name('post.pending');
 
+    Route::get('personal/timeline','PersonalController@index')->name('personal.timeline');
     Route::get('personal/profile','PersonalController@changeProfile')->name('personal.profile');
     Route::put('profile-update', 'PersonalController@updateProfile')->name('profile.update');
     Route::get('personal/password', 'PersonalController@changePassword')->name('personal.password');

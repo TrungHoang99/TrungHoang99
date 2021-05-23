@@ -96,11 +96,11 @@
             <div class="card-header bg-white pb-3">
               <div class="text-muted text-center mb-3"><small>Sign in with</small></div>
               <div class="btn-wrapper text-center">
-                <a href="#" class="btn btn-neutral btn-icon">
+                <a href="#" class="btn btn-neutral btn-icon disabled">
                   <span class="btn-inner--icon"><img src="{{ asset('assets/img/icons/common/facebook.svg') }}"></span>
                   <span class="btn-inner--text">Facebook</span>
                 </a>
-                <a href="#" class="btn btn-neutral btn-icon">
+                <a href="#" class="btn btn-neutral btn-icon disabled">
                   <span class="btn-inner--icon"><img src="{{ asset('assets/img/icons/common/google.svg') }}"></span>
                   <span class="btn-inner--text">Google</span>
                 </a>
@@ -122,7 +122,7 @@
                     <input placeholder="Email" id="email" type="email"  class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                     @error('email')
                       <span class="invalid-feedback" role="alert">
-                          <strong class="text-muted">{{ $message }}</strong>
+                          <strong class="text-danger">{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
@@ -136,7 +136,7 @@
 
                     @error('password')
                       <span class="invalid-feedback" role="alert">
-                        <strong class="text-muted">{{ $message }}</strong>
+                        <strong class="text-danger">{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>

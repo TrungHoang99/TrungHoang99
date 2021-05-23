@@ -96,11 +96,11 @@
             <div class="card-header bg-white pb-3">
               <div class="text-muted text-center mb-3"><small>Sign in with</small></div>
               <div class="btn-wrapper text-center">
-                <a href="#" class="btn btn-neutral btn-icon">
+                <a href="#" class="btn btn-neutral btn-icon disabled">
                   <span class="btn-inner--icon"><img src="{{ asset('assets/img/icons/common/facebook.svg') }}"></span>
                   <span class="btn-inner--text">Facebook</span>
                 </a>
-                <a href="#" class="btn btn-neutral btn-icon">
+                <a href="#" class="btn btn-neutral btn-icon disabled">
                   <span class="btn-inner--icon"><img src="{{ asset('assets/img/icons/common/google.svg') }}"></span>
                   <span class="btn-inner--text">Google</span>
                 </a>
@@ -122,7 +122,7 @@
                     <input placeholder="Name" id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                     @error('name')
                       <span class="invalid-feedback" role="alert">
-                          <strong class="text-muted">{{ $message }}</strong>
+                          <strong class="text-danger">{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
@@ -136,7 +136,7 @@
                     <input placeholder="Email" id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                     @error('email')
                       <span class="invalid-feedback" role="alert">
-                        <strong class="text-muted">{{ $message }}</strong>
+                        <strong class="text-danger">{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
@@ -160,18 +160,18 @@
                   </div>
                 </div>
                 <!-- Strong password -->
-                <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
+                <!-- <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div> -->
                 
-                <div class="custom-control custom-control-alternative custom-checkbox mb-3 mt-2">
+                <div class="custom-control custom-control-alternative custom-checkbox my-3">
                   <input class="custom-control-input" id="customCheck1" type="checkbox" onclick="showPass()">
                   <label class="custom-control-label" for="customCheck1">Show password</label>
                 </div>
 
                 <!-- Agree Privacy Policy -->
-                <div class="custom-control custom-control-alternative custom-checkbox">
+                <!-- <div class="custom-control custom-control-alternative custom-checkbox">
                     <input class="custom-control-input" id="customCheckRegister" type="checkbox">
                     <label class="custom-control-label" for="customCheckRegister"><span>I agree with the <a href="#">Privacy Policy</a></span></label>
-                </div>
+                </div> -->
         
                 </div>
                 <div class="text-center">

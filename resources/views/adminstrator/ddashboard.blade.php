@@ -16,7 +16,8 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="{{route('admin.category.create')}}" class="btn btn-sm btn-neutral">Add new</a>
+                        <a href="{{route('admin.category.create')}}" class="btn btn-sm btn-neutral">Add new category</a>
+                        <a href="{{route('admin.post.create')}}" class="btn btn-sm btn-neutral">Add new post</a>
                     </div>
                 </div>
                 <div class="row">
@@ -31,7 +32,7 @@
                                         <span class="h2 font-weight-bold mb-0">{{ $posts->count() }}</span>
                                     </div>
                                     <div class="col-auto">
-                                        <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                                        <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
                                             <i class="ni ni-archive-2"></i>
                                         </div>
                                     </div>
@@ -55,7 +56,7 @@
                                         <span class="h2 font-weight-bold mb-0">{{ $category_count }}</span>
                                     </div>
                                     <div class="col-auto">
-                                        <div class="icon icon-shape bg-gradient-blue text-white rounded-circle shadow">
+                                        <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
                                             <i class="ni ni-archive-2"></i>
                                         </div>
                                     </div>
@@ -75,28 +76,8 @@
                                         <span class="h2 font-weight-bold mb-0">{{ $total_pending_posts }}</span>
                                     </div>
                                     <div class="col-auto">
-                                        <div class="icon icon-shape bg-gradient-blue text-white rounded-circle shadow">
-                                            <i class="ni ni-archive-2"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End 1 -->
-                    <!-- 1 -->
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card card-stats">
-                            <!-- Card body -->
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Total views</h5>
-                                        <span class="h2 font-weight-bold mb-0">{{ $all_views }}</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-gradient-blue text-white rounded-circle shadow">
-                                            <i class="ni ni-archive-2"></i>
+                                        <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                                        <i class="ni ni-basket"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -116,27 +97,7 @@
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-gradient-blue text-white rounded-circle shadow">
-                                            <i class="ni ni-archive-2"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End 1 -->
-                    <!-- 1 -->
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card card-stats">
-                            <!-- Card body -->
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Today users</h5>
-                                        <span class="h2 font-weight-bold mb-0">{{ $new_users_today }}</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-gradient-blue text-white rounded-circle shadow">
-                                            <i class="ni ni-archive-2"></i>
+                                            <i class="fas fa-users"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +120,7 @@
                         <h3 class="mb-0">Most popular posts</h3>
                         </div>
                         <div class="col text-right">
-                            <!-- <a href="#!" class="btn btn-sm btn-primary">See all</a> -->
+                            <a href="{{ route('admin.post.index') }}" class="btn btn-sm btn-primary">See all</a>
                         </div>
                     </div>
                     </div>
@@ -173,7 +134,7 @@
                             <th scope="col">Author</th>
                             <th scope="col" class="text-center">Views</th>
                             <th scope="col" class="text-center">Comments</th>
-                            <th scope="col">Status</th>
+                            <th scope="col" class="text-center">Status</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -185,7 +146,7 @@
                                     <td>{{ $post->user->name }}</td>
                                     <td class="text-center">{{ $post->view_count }}</td>
                                     <td class="text-center">{{ $post->comments->count() }}</td>
-                                    <td>
+                                    <td class="text-center">
                                         @if($post->post_status == true)
                                             <span class="badge badge-dot mr-4">
                                                 <i class="bg-info"></i>
@@ -199,7 +160,7 @@
                                         @endif
                                     </td>
                                     <td class="text-right">
-                                        <a class="dropdown-item" href="{{route('admin.post.show', $post->id)}}"><span class="btn btn-outline-primary btn-sm">View</span></a>
+                                        <a class="dropdown-item d-flex justify-content-center" href="{{route('admin.post.show', $post->id)}}"><span class="btn btn-outline-primary btn-sm">View</span></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -216,7 +177,7 @@
                         <h3 class="mb-0">Top active users</h3>
                         </div>
                         <div class="col text-right">
-                            <!-- <a href="#!" class="btn btn-sm btn-primary">See all</a> -->
+                            <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-primary">See all</a>
                         </div>
                     </div>
                     </div>
@@ -227,6 +188,7 @@
                         <tr>
                             <th scope="col">Rank</th>
                             <th scope="col">Name</th>
+                            <th scope="col" class="text-center">Image</th>
                             <th scope="col" class="text-center">Posts</th>
                             <th scope="col" class="text-center">Comments</th>
                             <th scope="col"></th>
@@ -237,10 +199,15 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $user->name }}</td>
+                                    <td scope="row" class="text-center">
+                                        <span class="avatar avatar-sm rounded-circle">
+                                            <img alt="Image placeholder" src="{{ asset('storage/profiles/'. $user->image) }}">
+                                        </span>
+                                    </td>
                                     <td class="text-center">{{ $user->posts->count() }}</td>
                                     <td class="text-center">{{ $user->comments->count() }}</td>
                                     <td>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item d-flex justify-content-center" href="#">
                                             <form action="{{route('admin.users.destroy', $user->id)}}" method="post">
                                                 @method('delete')
                                                 @csrf

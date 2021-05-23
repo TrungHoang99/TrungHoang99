@@ -22,7 +22,7 @@
 
         <div class="card shadow my-2 py-3 px-3">
             <div class="card-body">
-                <p>There are <strong class="text-primary">{{ $posts->count() }}</strong> 
+                <p>There are <strong class="text-danger">{{ $posts->count() }}</strong> 
                     @if( $posts->count() >= 2 )
                     results for the keyword: <strong class="text-primary">{{ $query }}</strong>
                     @else
@@ -67,7 +67,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <p class="mb-0"><a href="#" class="text-sm text-muted">{{$post->category['title']}}</a></p>
                                 <h5 class="text-primary lh-110 mb-2"><a href="{{ route('post.details', $post->id) }}">{{$post->title}}</a></h5>
-                                <a href="" class=""><i class="ni ni-single-02"></i>&nbsp;<span>{{ $post->user->name }}</span></a>
+                                <a href="{{ route('user.profile', $post->user['name']) }}" class=""><i class="ni ni-single-02" target="blank_"></i>&nbsp;<span>{{ $post->user->name }}</span></a>
                                 <p class="text-sm text-muted mb-0">Posted on {{$post->created_at}}</p>
                                 <a href="{{ route('post.details', $post->id) }}" class="btn btn-link"><span>Read more</span> &rarr;</a>
                             </div>

@@ -10,7 +10,7 @@
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboards</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Users</li>
                             </ol>
                         </nav>
@@ -42,7 +42,7 @@
                 @endif
             <!-- Card header -->
             <div class="card-header border-0 d-flex justify-content-between">
-                <h2 class="mb-0 mt-1">User table ({{ $users->count() }} users)</h2>
+                <h2 class="mb-0 mt-1">User table (<span class="text-danger">{{ $users->count() }}</span> users)</h2>
             </div>
             <!-- Light table -->
             <div class="table-responsive">
@@ -56,7 +56,8 @@
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col" class="sort" data-sort="name">Name</th>
-                            <th scope="col" class="sort" data-sort="name">Image</th>
+                            <th scope="col" class="sort" data-sort="name">Email</th>
+                            <th scope="col" class="sort text-center" data-sort="name">Image</th>
                             <th scope="col" class="sort" data-sort="name">Posts</th>
                             <th scope="col" class="sort" data-sort="name">Comments</th>
                             <th scope="col" class="sort" data-sort="status">Create at</th>
@@ -70,15 +71,16 @@
                         <tr>
                             <td scope="row">{{ $user->id }}</td>
                             <td scope="row">{{ $user->name }}</td>
-                            <td>
+                            <td scope="row">{{ $user->email }}</td>
+                            <td class="text-center">
                                 @if( $user->image )
-                                    <img src="{{ asset('storage/profiles/'. $user->image) }}" class="rounded w-50 h-auto">
+                                    <img src="{{ asset('storage/profiles/'. $user->image) }}" class="img-fluid rounded-circle w-50 h-auto">
                                 @else
                                     <p class="text-muted">No image</p>
                                 @endif
                             </td>
-                            <td scope="row">{{ $user->posts->count() }}</td>
-                            <td scope="row">{{ $user->comments->count() }}</td>
+                            <td scope="row" class="text-center">{{ $user->posts->count() }}</td>
+                            <td scope="row" class="text-center">{{ $user->comments->count() }}</td>
                             <td scope="row">{{ $user->created_at }}</td>
                             <td scope="row">{{ $user->updated_at }}</td>
                             <td class="text-right">

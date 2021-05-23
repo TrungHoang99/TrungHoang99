@@ -56,7 +56,7 @@
                         <tr>
                             <th scope="col">No.</th>
                             <th scope="col" class="sort" data-sort="name">Name</th>
-                            <th scope="col" class="sort" data-sort="name">Image</th>
+                            <th scope="col" class="sort text-center" data-sort="name">Image</th>
                             <th scope="col" class="sort" data-sort="name">Created at</th>
                             <th scope="col" class="sort" data-sort="name">Updated at</th>
                             <th scope="col" class="sort" data-sort="status">Status</th>
@@ -69,7 +69,7 @@
                         <tr>
                             <td scope="row">{{$key}}</td>
                             <td scope="row">{{$cate->title}}</td>
-                            <td>
+                            <td class="text-center">
                                 @if($cate->image)
                                     <img src="{{ asset('storage/categories/'. $cate->image) }}" class="rounded w-50 h-auto">
                                 @else

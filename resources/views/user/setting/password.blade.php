@@ -24,8 +24,8 @@
               </div>
               <div class="card-header text-center border-0 pt-7 pt-md-4 pb-md-4">
                 <div class="d-flex justify-content-around">
-                  <a href="#" class="btn btn-sm btn-info  mr-4 ">Connect</a>
-                  <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                  <a href="#" class="btn btn-sm btn-info  mr-4 disabled">Connect</a>
+                  <a href="#" class="btn btn-sm btn-default float-right disabled">Message</a>
                 </div>
               </div>
               <div class="card-body pt-0">
@@ -33,12 +33,22 @@
                   <div class="col">
                     <div class="card-profile-stats d-flex justify-content-center">
                       <div class="d-flex flex-column mr-5">
-                        <span class="text-center heading">10</span>
-                        <span class="description text-md text-muted">Post</span>
+                        @if (Auth::user()->posts->count() < 2 )
+                          <span class="text-center heading">{{ Auth::user()->posts->count() }}</span>
+                          <span class="description text-md text-muted">Post</span>
+                        @else
+                          <span class="text-center heading">{{ Auth::user()->posts->count() }}</span>
+                          <span class="description text-md text-muted">Posts</span>
+                        @endif
                       </div>
                       <div class="d-flex flex-column">
-                        <span class="text-center heading">89</span>
-                        <span class="description text-md text-muted">Comments</span>
+                        @if (Auth::user()->comments->count() < 2 )
+                          <span class="text-center heading">{{ Auth::user()->comments->count() }}</span>
+                          <span class="description text-md text-muted">Comment</span>
+                        @else
+                          <span class="text-center heading">{{ Auth::user()->comments->count() }}</span>
+                          <span class="description text-md text-muted">Comments</span>
+                        @endif
                       </div>
                     </div>
                   </div>
@@ -72,6 +82,14 @@
                       <i class="ni ni-hat-3 text-primary"></i><small class="text-muted ml-2">{{Auth::user()->about}}</small>
                     @endif
                     </div>
+
+                    <div class="mt-2">
+                    @if (Auth::user()->social_network == '')
+                      <i class="ni ni-world-2 text-primary"></i><small class="text-muted ml-2">You have not updated this information</small>
+                    @else
+                      <i class="ni ni-world-2 text-primary"></i><small class="text-muted ml-2"><span class="text-primary">{{ Auth::user()->social_network }}</span> - {{ Auth::user()->social_network_link }}</small>
+                    @endif
+                    </div>
             
                   </div>
                 </div>
@@ -88,7 +106,7 @@
             <div class="nav-wrapper">
               <ul class="nav nav-pills nav-fill flex-column flex-md-row justify-content-start" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link mb-sm-3 mb-md-0 " href="{{ route('home') }}" ><i class="ni ni-basket mr-2"></i>Timeline</a>
+                  <a class="nav-link mb-sm-3 mb-md-0 " href="{{ route('user.personal.timeline') }}" ><i class="ni ni-basket mr-2"></i>Timeline</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link mb-sm-3 mb-md-0 active" href="{{ route('user.personal.profile') }}"><i class="ni ni-single-02 mr-2"></i>Profile</a>
@@ -97,7 +115,7 @@
                   <a class="nav-link mb-sm-3 mb-md-0" href="{{ route('user.post.index') }}"><i class="ni ni-folder-17 mr-2"></i>Post</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link mb-sm-3 mb-md-0" href="{{ route('user.comment.index') }}"><i class="ni ni-folder-17 mr-2"></i>Comments</a>
+                  <a class="nav-link mb-sm-3 mb-md-0" href="{{ route('user.comment.index') }}"><i class="ni ni-chat-round mr-2"></i>Comment</a>
                 </li>
             </div>
           </div>

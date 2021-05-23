@@ -51,6 +51,8 @@ class PostController extends Controller
             'tag' => 'required',
             'category_id' => 'required',
             'post_status' => 'required',
+            'source_title' => ' ',
+            'source_link' => ' ',
         ],
         [
             'title.required' => 'You need enter the title',
@@ -80,9 +82,14 @@ class PostController extends Controller
         $post->tag = $data['tag'];
         $post->category_id = $data['category_id'];
         $post->post_status = $data['post_status'];
+        $post->is_approve = 1;
         $now = Carbon::now('Asia/Ho_Chi_Minh')->format('l jS \\of F Y h:i:s A');
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $post->created_at = now();
+
+        $post->source_title = $data['source_title'];
+        $post->source_link = $data['source_link'];
+
         $post ->save();
         
         return back()->with('success', 'Create post completed ^^');
@@ -129,6 +136,8 @@ class PostController extends Controller
             'tag' => 'required',
             'category_id' => 'required',
             'post_status' => 'required',
+            'source_title' => ' ',
+            'source_link' => ' ',
         ],
         [
             'title.required' => 'You need enter the title',
@@ -161,13 +170,17 @@ class PostController extends Controller
         $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $post->updated_at = now();
+
+        $post->source_title = $data['source_title'];
+        $post->source_link = $data['source_link'];
+
         $post ->save();
         
         return back()->with('success', 'Update post completed ^^');
     }
 
     public function pending(){
-        $post = Post::where('is_approve', false)->paginate(2);;
+        $post = Post::where('is_approve', false)->paginate(7);;
         return view('adminstrator.post.pending', compact('post'));
     }
 

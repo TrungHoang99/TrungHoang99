@@ -28,7 +28,8 @@
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/argon.css?v=1.2.0') }}" type="text/css">
   <!-- <link href="{{ asset('assets/css/argon.css') }}" rel="stylesheet" /> -->
-
+  <!-- CKEditor -->
+  <script src="//cdn.ckeditor.com/4.16.0/basic/ckeditor.js"></script>
 </head>
 
 <body>
@@ -102,7 +103,7 @@
                   <span>Post management</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#!" class="dropdown-item">
+                <a href="{{ route('admin.post.create') }}" class="dropdown-item">
                   <i class="ni ni-fat-add"></i>
                   <span>Add new</span>
                 </a>
@@ -111,8 +112,8 @@
 
             <li class="nav-item dropdown">
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="ni ni-single-02 text-primary"></i>
-                <span class="nav-link-text">Members</span>
+              <i class="fas fa-users text-primary"></i>
+                <span class="nav-link-text">Users</span>
               </a>
               <div class="dropdown-menu">
                 <a href="{{ route('admin.users.index') }}" class="dropdown-item">
@@ -128,36 +129,37 @@
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="ni ni-settings text-black"></i>
-                <span class="nav-link-text">Setting</span>
+              <a class="nav-link pr-0" href="{{ route('admin.settings') }}" role="button">
+                <i class="ni ni-single-02 text-default"></i>
+                <span class="nav-link-text">Profile setting</span>
               </a>
-              <div class="dropdown-menu">
+              <!-- <div class="dropdown-menu">
                 <a href="{{ route('admin.settings') }}" class="dropdown-item">
                   <i class="ni ni-folder-17"></i>
-                  <span>Manage setting</span>
+                  <span>Profile management</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#!" class="dropdown-item">
                   <i class="ni ni-support-16"></i>
-                  <span>Another</span>
+                  <span>Password management</span>
                 </a>
-              </div>
+              </div> -->
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="{{ route('admin.comment.index') }}">
                 <i class="ni ni-chat-round text-yellow"></i>
-                <span class="nav-link-text">Comment</span>
+                <span class="nav-link-text">Comments</span>
               </a>
             </li>
+            
             <li class="nav-item">
               <a class="nav-link" href="">
-                <i class="ni ni-folder-17 text-default"></i>
-                <span class="nav-link-text">Manage comment</span>
+                <i class="ni ni-settings text-black"></i>
+                <span class="nav-link-text">Settings</span>
               </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" href="examples/login.html">
                 <i class="ni ni-key-25 text-info"></i>
                 <span class="nav-link-text">Login</span>
@@ -168,7 +170,7 @@
                 <i class="ni ni-circle-08 text-pink"></i>
                 <span class="nav-link-text">Register</span>
               </a>
-            </li>
+            </li> -->
           </ul>
           <!-- Divider -->
           <hr class="my-3">
@@ -227,7 +229,7 @@
                 <div class="dropdown-header noti-title">
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
-                <a href="#!" class="dropdown-item">
+                <a href="{{ route('admin.settings') }}" class="dropdown-item">
                   <i class="ni ni-single-02 text-primary"></i>
                   <span>My profile</span>
                 </a>
@@ -235,10 +237,10 @@
                   <i class="ni ni-settings text-primary"></i>
                   <span>Settings</span>
                 </a>
-                <a href="#!" class="dropdown-item">
+                <!-- <a href="#!" class="dropdown-item">
                   <i class="ni ni-support-16 text-primary"></i>
                   <span>Support</span>
-                </a>
+                </a> -->
                 <div class="dropdown-divider"></div>
                 <a href="{{ route('logout') }}" class="dropdown-item" 
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -294,6 +296,9 @@
   </div>
 
   <!-- Argon Scripts -->
+  <script type="text/javascript">
+    CKEDITOR.replace( 'texteditor' );
+  </script>
   <!-- Core -->
   <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
   <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>

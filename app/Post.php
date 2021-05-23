@@ -31,8 +31,14 @@ class Post extends Model
         return $this->hasMany('App\Comment');
     }
 
+    public function likedUsers()
+    {
+        return $this->belongsToMany('App\User');
+    }
+
     public function scopeApproved($query)
     {
         return $query->where('is_approve', 1);
     }
+
 }

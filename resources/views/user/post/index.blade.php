@@ -1,6 +1,6 @@
 @extends('user.dashboard')
 
-@section('title','Post')
+@section('title','My posts')
 
 @section('content')
 
@@ -24,8 +24,8 @@
               </div>
               <div class="card-header text-center border-0 pt-7 pt-md-4 pb-md-4">
                 <div class="d-flex justify-content-around">
-                  <a href="#" class="btn btn-sm btn-info  mr-4 ">Connect</a>
-                  <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                  <a href="#" class="btn btn-sm btn-info mr-4 disabled">Connect</a>
+                  <a href="#" class="btn btn-sm btn-default float-right disabled">Message</a>
                 </div>
               </div>
               <div class="card-body pt-0">
@@ -33,12 +33,22 @@
                   <div class="col">
                     <div class="card-profile-stats d-flex justify-content-center">
                       <div class="d-flex flex-column mr-5">
-                        <span class="text-center heading">10</span>
-                        <span class="description text-md text-muted">Post</span>
+                        @if (Auth::user()->posts->count() < 2 )
+                          <span class="text-center heading">{{ Auth::user()->posts->count() }}</span>
+                          <span class="description text-md text-muted">Post</span>
+                        @else
+                          <span class="text-center heading">{{ Auth::user()->posts->count() }}</span>
+                          <span class="description text-md text-muted">Posts</span>
+                        @endif
                       </div>
                       <div class="d-flex flex-column">
-                        <span class="text-center heading">89</span>
-                        <span class="description text-md text-muted">Comments</span>
+                        @if (Auth::user()->comments->count() < 2 )
+                          <span class="text-center heading">{{ Auth::user()->comments->count() }}</span>
+                          <span class="description text-md text-muted">Comment</span>
+                        @else
+                          <span class="text-center heading">{{ Auth::user()->comments->count() }}</span>
+                          <span class="description text-md text-muted">Comments</span>
+                        @endif
                       </div>
                     </div>
                   </div>
@@ -72,12 +82,20 @@
                       <i class="ni ni-hat-3 text-primary"></i><small class="text-muted ml-2">{{Auth::user()->about}}</small>
                     @endif
                     </div>
+
+                    <div class="mt-2">
+                    @if (Auth::user()->social_network == '')
+                      <i class="ni ni-world-2 text-primary"></i><small class="text-muted ml-2">You have not updated this information</small>
+                    @else
+                      <i class="ni ni-world-2 text-primary"></i><small class="text-muted ml-2"><span class="text-primary">{{ Auth::user()->social_network }}</span> - {{ Auth::user()->social_network_link }}</small>
+                    @endif
+                    </div>
             
                   </div>
                 </div>
               </div>
               <div class="row justify-content-center p-4">
-                <a class="btn btn-outline-info btn-sm btn-fw" href="{{route('user.personal.password')}}">Change password</a>
+                <a class="btn btn-outline-info btn-sm btn-fw" href="{{ route('user.personal.profile') }}">Edit profile</a>
               </div>
             </div>
           </div>
@@ -88,7 +106,7 @@
             <div class="nav-wrapper">
               <ul class="nav nav-pills nav-fill flex-column flex-md-row justify-content-start" id="tabs-icons-text" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link mb-sm-3 mb-md-0 " href="{{ route('home') }}" ><i class="ni ni-basket mr-2"></i>Timeline</a>
+                    <a class="nav-link mb-sm-3 mb-md-0 " href="{{ route('user.personal.timeline') }}" ><i class="ni ni-basket mr-2"></i>Timeline</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mb-sm-3 mb-md-0" href="{{ route('user.personal.profile') }}"><i class="ni ni-single-02 mr-2"></i>Profile</a>
@@ -97,7 +115,7 @@
                     <a class="nav-link mb-sm-3 mb-md-0 active" href="{{ route('user.post.index') }}"><i class="ni ni-folder-17 mr-2"></i>Post</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mb-sm-3 mb-md-0" href="{{ route('user.comment.index') }}"><i class="ni ni-folder-17 mr-2"></i>Comments</a>
+                    <a class="nav-link mb-sm-3 mb-md-0" href="{{ route('user.comment.index') }}"><i class="ni ni-chat-round mr-2"></i>Comment</a>
                 </li>
               </ul>
             </div>
@@ -108,7 +126,7 @@
                 <h1 class="display-4 text-right text-primary my-1">Display Post</h1>
                     <div>
                         <span class="badge badge-success py- px-2">Approved</span>
-                        <a href="{{ route('user.post.pending') }}" class="badge badge-danger py- px-2 disabled">Pending</a>
+                        <span class="badge badge-danger py- px-2">Pending</span>
                     </div>
                 </div>
                 
@@ -166,11 +184,10 @@
 
                             <!-- Tab panel 1 -->
                             <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
-                              <h5 class="display-4 info-title text-primary">Personal post:</h5>
+                              <h5 class="display-4 info-title text-primary">All my posts:</h5>
                               <div class="dropdown-divider mt-3"></div>
                                 <!-- <div class=" mb-3 pt-1"> -->
                                     @foreach ($post as $p)
-                                    <!-- @if($p->is_approve == true) -->
                                     <div class="card card-lift--hover shadow mt-3">
                                         <div class="row p-2">
                                             <div class="col-md-6 col-sm-12">
@@ -203,16 +220,20 @@
                                                 <h6 class="text-primary lh-110 mb-2"><a href="#">{{$p->title}}</a></h6>
                                                 <p class="text-sm text-muted mb-0">Posted on {{$p->created_at}}</p>
                                                 <a href="{{route('user.post.show',  $p->id)}}" class="btn btn-link"><span>Read more</span> &rarr;</a>
-
+                                                @if ($p->is_approve == true)
+                                                  <span class="badge badge-success py- px-2">Approved</span>
+                                                @else
+                                                  <span class="badge badge-danger py- px-2">Pending</span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- @endif -->
                                     @endforeach                    
                                     <!-- else -->
                                     <!-- <h6 class="text-muted text-center mt-2">Chưa có bài viết nào cả :))</h6> -->
                                     <!-- end-else -->
                                 <!-- </div>   -->
+
                             </div>
                             <!-- End tab panel 1 -->
                         </div>

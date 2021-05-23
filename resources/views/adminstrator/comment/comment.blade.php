@@ -16,7 +16,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="{{route('admin.category.create')}}" class="btn btn-sm btn-neutral">Comment table</a>
+                        <a href="{{ route('admin.comment.index') }}" class="btn btn-sm btn-neutral">Comment table</a>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                         <tr>
                             <th scope="col">No.</th>
                             <th scope="col" class="sort" data-sort="name">Comment</th>
-                            <th scope="col" class="sort" data-sort="name">Comment's user</th>
+                            <th scope="col" class="sort text-center" data-sort="name">Comment's user</th>
                             <th scope="col" class="sort" data-sort="name">Post info</th>
                             <th scope="col" class="sort" data-sort="name">Author</th>
                             <th scope="col"></th>

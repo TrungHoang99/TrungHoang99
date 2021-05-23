@@ -7,7 +7,7 @@
 <div class="wrapper">
     <div class="container">
       <!-- Page Heading/Breadcrumbs -->
-    <h2 class="display-3 mt-4 mb-3">Blog Post
+    <h2 class="display-3 mt-4 mb-3">Blog's post
       <small>{{$post->title}}</small>
     </h1>
 
@@ -44,7 +44,7 @@
         <!-- Post Content -->
         <p class="text-sm"><a href="{{ route('category.posts', $post->category->title ) }}">{{$post->category['title']}}</a></p>
         <p class="summary">{{$post->summary}}</p>
-        <dd class="text-default">{{$post->content}}</dd>
+        <dd class="text-default">{!!$post->content!!}</dd>
         <h6 class="text-primary mt-3">Tags:</h6><p class="text-md text-muted"><i class="ni ni-tag mr-2"></i>{{$post->tag}}</p>
 
         <blockquote class="blockquote">
@@ -54,15 +54,15 @@
           </footer>
         </blockquote>
 
-        <hr class="mt-0 mb-2">
+        <hr class="my-0">
 
         <div class="card-body d-flex justify-content-end">
           <!-- <a href="" class="text-md mx-4"><i class="ni ni-favourite-28 text-danger mr-1"></i>10</a> -->
-          <a href="" class="text-md mx-4"><i class="fas fa-eye text-primary mr-1"></i>{{$post->view_count}}</a>
-          <a href="" class="text-md mx-4"><i class="ni ni-chat-round text-info  mr-1"></i>{{$post->comments->count()}}</a>
+          <span class="text-md mx-4"><i class="fas fa-eye text-primary mr-1"></i>{{$post->view_count}}</span>
+          <span class="text-md mx-4"><i class="ni ni-chat-round text-info mr-1"></i>{{$post->comments->count()}}</span>
         </div>
 
-        <hr class="m-0">
+        <hr class="my-0">
 
         <div class="col-md-8 mx-auto text-center">
           <h4 class="display-4">Related posts:</h4>

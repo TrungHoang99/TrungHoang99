@@ -58,6 +58,11 @@ class User extends Authenticatable
         return $this->hasMany('App\CommentReply');
     }
 
+    public function likedPosts()
+    {
+        return $this->belongsToMany('App\Post');
+    }
+
     public function scopeUsers($query)
     {
         return $query->where('role_id',2);

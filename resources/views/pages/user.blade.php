@@ -7,14 +7,14 @@
 <div class="wrapper">
 
     <div class="container mt-3">
-        <h2 class="display-3 mt-4 mb-3">User 
-            <small>profile</small>
+        <h2 class="display-3 mt-4 mb-3">Blog's user
+            <small>{{ $user->name }}</small>
         </h2>
 
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Profile</a></li>
+                <li class="breadcrumb-item"><a href="#">User</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ $user->name }}</li>
             </ol>
         </nav>
@@ -42,22 +42,60 @@
               <!-- end-btn -->
               <div class="col-lg-4 order-lg-1">
                 <div class="card-profile-stats d-flex justify-content-center">
-                  <div class="d-flex flex-column mr-3">
+                  <!-- <div class="d-flex flex-column mr-3">
                     <span class="heading text-center"><b>{{ $posts->count() }}</b></span>
                     <span class="description text-md text-muted">Posts</span>
+                  </div> -->
+                  <div class="d-flex flex-column mt-3 mr-5">
+                    @if ($posts->count() < 2 )
+                      <span class="text-center heading"><b>{{ $posts->count() }}</b></span>
+                      <span class="description text-md text-muted">Post</span>
+                    @else
+                      <span class="text-center heading"><b>{{ $posts->count() }}</b></span>
+                      <span class="description text-md text-muted">Posts</span>
+                    @endif
                   </div>
-                  <div class="d-flex flex-column">
-                    <span class="heading text-center"><b>{{ $user->comments->count() }}</b></span>
-                    <span class="description text-md text-muted">Comments</span>
+                  <div class="d-flex flex-column mt-3 mr-5">
+                    @if ($user->comments->count() < 2 )
+                      <span class="text-center heading"><b>{{ $user->comments->count() }}</b></span>
+                      <span class="description text-md text-muted">Comment</span>
+                    @else
+                      <span class="text-center heading"><b>{{ $user->comments->count() }}</b></span>
+                      <span class="description text-md text-muted">Comments</span>
+                    @endif
                   </div>
+                  <!-- Comment -->
                 </div>
               </div>
             </div>
             <div class="text-center mt-5">
               <h3>{{ $user->name }}<span class="font-weight-light"></span></h3>
-              <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i>{{ $user->address }}</div>
-              <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>{{ $user->job }}</div>
-              <!-- <div><i class="ni education_hat mr-2"></i>University of Computer Science</div> -->
+            </div>
+            <div class="text-left px-7">
+              <dt>
+                @if ($user->address == '')
+                  <i class="ni ni-square-pin text-primary mx-2 my-2"></i>This information is not available!
+                @else
+                  <i class="ni ni-square-pin text-primary mx-2 my-2"></i>{{ $user->address }}
+                @endif
+              </dt>
+
+              <dt>
+                @if ($user->job == '')
+                  <i class="ni ni-briefcase-24 text-primary mx-2 my-2"></i>This information is not available!
+                @else
+                  <i class="ni ni-briefcase-24 text-primary mx-2 my-2"></i>{{ $user->job }}
+                @endif
+              </dt>
+
+              <dt>
+                @if ($user->social_network == '')
+                  <i class="ni ni-world-2 text-primary mx-2 my-2"></i>This information is not available!
+                @else
+                  <i class="ni ni-world-2 text-primary mx-2 my-2"></i><span class="text-primary">{{ $user->social_network }}</span> - <small>{{ $user->social_network_link }}</small>
+                @endif
+              </dt>
+      
             </div>
             <div class="mt-3 py-3 border-top text-center">
               <div class="row justify-content-center">
@@ -75,7 +113,7 @@
     <section class="section">
         <div class="container">
             <div class="card shadow">
-                <h3 class="display-3 text-muted text-center my-2">Popular Stuff</h3>
+                <h3 class="display-3 text-muted text-center my-2">Popular Stuff ({{ $posts->count() }})</h3>
                 <hr class="mt-0 mb-2">
                 <div class="card-body mb-3 pt-2">
                   @if($posts->count() > 0)

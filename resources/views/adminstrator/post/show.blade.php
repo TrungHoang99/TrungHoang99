@@ -37,7 +37,7 @@
             <div class="card">
                 <div class="card-header border-0 d-flex justify-content-between align-items-center">
                     <div class="">
-                        <h2 class="mb-0 mt-1">Title: {{$post->title}}</h2>
+                        <h2 class="mb-0 mt-1">Title: <span class="text-info">{{$post->title}}</span></h2>
                         <small>Post by
                             <strong><a href="">{{$post->user['name']}}</a></strong>
                             on {{$post->created_at}}
@@ -59,37 +59,56 @@
                 </div>
 
                 <div class="card-body">
-                    {{$post->content}}
+                    <p>{{ $post->summary }}</p>
+                    <dt>{!!$post->content!!}</dt>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-header border-0 d-flex justify-content-between align-items-center">
+                <div class="card-header border-0 ">
                     <h3 class="mb-0 mt-1">Image</h3>
                 </div>
-                <div class="card-body">
-                    <img class="img-thumbnail w-50 h-auto" src="{{ asset('storage/posts/'. $post->image) }}" alt="">
+                <div class="card-body d-flex justify-content-center align-items-center">
+                    <img class="rounded w-50 h-auto" src="{{ asset('storage/posts/'. $post->image) }}" alt="">
                 </div>
             </div>
         </div>
         <div class="col-md-4 col-sm-12">
             <div class="card">
-                <div class="card-header border-0 d-flex justify-content-between align-items-center">
-                    <h3 class="mb-0 mt-1">Category</h3>
-                </div>
                 <div class="card-body">
+                    <h3 class="mb-0">Category</h3>
+                    <div class="dropdown-divider my-2"></div>
                     <a href="" class="badge badge-info">{{$post->category['title']}}</a>
                 </div>
             </div>
 
             <div class="card">
+                <div class="card-body">
+                    <h3 class="mb-0">Tag</h3>
+                    <div class="dropdown-divider my-2"></div>
+                    <span class="badge badge-warning">{{$post->tag}}</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="mb-0">Source</h3>
+                    <div class="dropdown-divider my-2"></div>
+                    <dt>{{ $post->source_title }}</dt>
+                    <small class="">{{ $post->source_link }}</small>
+                </div>
+            </div>
+
+            <!-- <div class="card">
                 <div class="card-header border-0 d-flex justify-content-between align-items-center">
                     <h3 class="mb-0 mt-1">Tag</h3>
                 </div>
                 <div class="card-body">
                     <span class="badge badge-warning">{{$post->tag}}</span>
                 </div>
-            </div>
+            </div> -->
+
+
         </div>
     </div>
 </div>

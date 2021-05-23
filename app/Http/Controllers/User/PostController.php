@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\User;
 
+use Mail;
 use File;
+use App\User;
 use App\Post;
 use App\Category;
 use Carbon\Carbon;
@@ -20,14 +22,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = Auth::user()->posts()->approved()->latest()->get();
+        $post = Auth::user()->posts;
         return view('user.post.index', compact('post'));
-    }
-
-    public function postPending()
-    {
-        $posts_pending = Auth::user()->posts()->where('is_approve', 'false')->get();
-        return view('user.post.pending', compact('$posts_pending'));
     }
 
     /**
@@ -58,6 +54,8 @@ class PostController extends Controller
             'category_id' => 'required',
             'post_status' => 'required',
             'checkbox'=> 'required',
+            'source_title' => ' ',
+            'source_link' => ' ',
         ],
         [
             'title.required' => 'You need enter the title',
@@ -90,9 +88,20 @@ class PostController extends Controller
         $now = Carbon::now('Asia/Ho_Chi_Minh')->format('l jS \\of F Y h:i:s A');
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $post->created_at = now();
+
+        $post->source_title = $data['source_title'];
+        $post->source_link = $data['source_link'];
+
         $post ->save();
-        
-        return back()->with('success', 'Create post completed ^^');
+
+        $title_mail = "New post from USER".' '.$now;
+        $data = array("title_mail"=>$title_mail,"body"=>'Send mail','email'=>'trunghq9599@gmail.com'); //body of mail.blade.php
+        Mail::send('user.mail.mailtoAdmin', ['data'=>$data] , function($message) use ($title_mail,$data){
+            $message->to($data['email'])->subject($title_mail);
+            $message->from($data['email'],$title_mail);
+        });   
+
+        return back()->with('success', 'Create post completed, Please wait for the administrator to approve ^^');
     }
 
     /**
@@ -135,6 +144,8 @@ class PostController extends Controller
             'tag' => 'required',
             'category_id' => 'required',
             'post_status' => 'required',
+            'source_title' => ' ',
+            'source_link' => ' ',
         ],
         [
             'title.required' => 'You need enter the title',
@@ -166,6 +177,10 @@ class PostController extends Controller
         $now = Carbon::now('Asia/Ho_Chi_Minh')->format('l jS \\of F Y h:i:s A');
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $post->updated_at = now();
+
+        $post->source_title = $data['source_title'];
+        $post->source_link = $data['source_link'];
+
         $post ->save();
         
         return back()->with('success', 'Update post completed ^^');

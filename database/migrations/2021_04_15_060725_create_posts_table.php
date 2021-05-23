@@ -25,6 +25,8 @@ class CreatePostsTable extends Migration
             $table->integer('category_id');
             $table->boolean('post_status')->default(false);
             $table->boolean('is_approve')->default(false);
+            $table->string('source_title')->nullable();
+            $table->string('source_link')->nullable();
             $table->timestamps();
         });
     }

@@ -11,15 +11,15 @@
       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
-  <div class="carousel-inner">
+  <div class="carousel-inner" style="height:500px">
     <div class="carousel-item active">
-      <img class="d-block w-100 h-100" src="assets/img/wizard-boat.jpg" alt="Smiley face">
+      <img class="d-block w-100 h-auto" src="assets/img/wizard.jpg" alt="Smiley face">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100 h-100" src="assets/img/wizard-city.jpg" alt="Second slide">
+      <img class="d-block w-100 h-auto" src="assets/img/wizard-city.jpg" alt="Second slide">
     </div>
-    <div class="carousel-item">
-      <img class="d-block w-100 h-100" src="assets/img/wizard-city.jpg" alt="Third slide">
+    <div class="carousel-item" >
+      <img class="d-block w-100 h-auto" src="assets/img/wizard-boat.jpg" alt="Third slide">
     </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -95,9 +95,22 @@
                 </div>
                 <div class="dropdown-divider mt-1"></div>
                 <div class="card-body d-flex justify-content-around">
+                    <!-- @guest
+                      <a href="{{ route('login') }}" onClick="return confirm('You need to login before liking!!!')" class="text-sm"><i class="ni ni-favourite-28 text-muted"></i>{{ $post->likedUsers->count() }}</a>
+                    @else
+                      <a href="" onclick="document.getElementById('like-form-{{ $post->id }}').submit();" class="text-sm">
+                        <i class="ni ni-favourite-28" aria-hidden="true" 
+                        style="{{ Auth::user()->likedPosts()->where('post_id', $post->id)->count() > 0 ? 'red': '' }}"></i>
+                        {{ $post->likedUsers->count() }}
+                      </a>
+
+                      <form id="like-form-{{ $post->id }}" method="post" action="{{ route('post.like', $post->id) }}" style="display: none;">
+                        @csrf
+                      </form>
+                    @endguest -->
                     <!-- <a href="" class="text-sm"><i class="ni ni-favourite-28 text-danger"></i>10</a> -->
-                    <a href="" class="text-sm"><i class="fas fa-eye text-primary"></i>{{$post->view_count}}</a>
-                    <a href="" class="text-sm"><i class="ni ni-chat-round text-info"></i>{{ $post->comments->count() }}</a>
+                    <a href="{{ route('post.details', $post->id) }}" class="text-sm"><i class="fas fa-eye text-primary"></i>{{$post->view_count}}</a>
+                    <a href="{{ route('post.details', $post->id) }}" class="text-sm"><i class="ni ni-chat-round text-info"></i>{{ $post->comments->count() }}</a>
                 </div>
             </div>
         </div>
@@ -105,9 +118,31 @@
       @endif
     @endif
     @endforeach
+    
+    <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-6 my-2">
+        <div class="card card-lift--hover shadow py-0 px-0 m-0">
+            <div class="info pt-0">
+            <p class="description opacity-8 mt-0"></p>
+                <div class="description">
+                    <img src="assets/img/wizard-boat.jpg" alt="" class="rounded" width=100%  
+                    style="background-position: cover; height: 160px">
+                </div>
+                <div class="ml-2">
+                    <h5 class="info-title text-primary content-tab-item__detail pt-1 mt-1 mb-1"><a href="">Title of post</a></h5>
+                    <p class="description text-info mb-1"><a href="">Author</a></p>
+                    <p class="description opacity-8 text-sm mb-1">2021-04-23 11:00:00</p>
+                </div>
+                <div class="dropdown-divider mt-1"></div>
+                <div class="card-body d-flex justify-content-around">
+                    <a href="" class="text-sm"><i class="fas fa-eye text-primary"></i>1</a>
+                    <a href="" class="text-sm"><i class="ni ni-chat-round text-info"></i>1</a>
+                </div>
+            </div>
+        </div>
+      </div>
 
-
-    </div>    
+    </div> -->
+    
   </div>
 </div>
 
@@ -213,8 +248,8 @@
     <div class="container h-100">
       <div class="row h-100 align-items-center">
         <div class="col-lg-12">
-          <h1 class="display-4 text-white mt-5 mb-2">Business Name or Tagline</h1>
-          <p class="lead mb-5 text-white-50">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non possimus ab labore provident mollitia. Id assumenda voluptate earum corporis facere quibusdam quisquam iste ipsa cumque unde nisi, totam quas ipsam.</p>
+          <h1 class="display-4 text-white mt-5 mb-2">Business Name of BlogComic</h1>
+          <p class="lead mb-5 text-white-50">BlogComic was created for the purpose of sharing useful information and stories with users.</p>
         </div>
       </div>
     </div>
@@ -229,23 +264,23 @@
         <hr>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis optio neque consectetur consequatur magni in nisi, natus beatae quidem quam odit commodi ducimus totam eum, alias, adipisci nesciunt voluptate. Voluptatum.</p>
-        <a class="btn btn-primary" href="#">Call to Action &raquo;</a>
+        <!-- <a class="btn btn-primary" href="#">Call to Action &raquo;</a> -->
       </div>
       <div class="col-md-4 mb-5">
         <h2>Contact Us</h2>
         <hr>
         <address>
-          <strong>Start Bootstrap</strong>
-          <br>3481 Melrose Place
-          <br>Beverly Hills, CA 90210
+          <strong>BlogComic</strong>
+          <br>043 Da Nang City
+          <br>VietNam, VN 21
           <br>
         </address>
         <address>
-          <abbr title="Phone">P:</abbr>
-          (123) 456-7890
+          <abbr title="Phone">Phone:</abbr>
+          (+84) 345-456-7890
           <br>
-          <abbr title="Email">E:</abbr>
-          <a href="mailto:#">name@example.com</a>
+          <abbr title="Email">Email:</abbr>
+          <a href="mailto:#">blogcomic@gmail.com</a>
         </address>
       </div>
     </div>

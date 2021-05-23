@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->string('image')->default('default-avatar.png');
             $table->string('about')->nullable();
+            $table->string('social_network')->nullable();
+            $table->string('social_network_link')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

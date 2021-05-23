@@ -68,7 +68,11 @@ class SettingController extends Controller
         }
         else {
             return redirect()->back()->with('error', 'Current password not match');
-        }
-        
+        } 
+    }
+    
+    public function background ()
+    {
+
     }  
 }
